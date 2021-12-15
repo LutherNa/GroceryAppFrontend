@@ -3,11 +3,12 @@ import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
 import {useNavigate, Navigate} from 'react-router-dom';
-import Login from './Login.js';
 
+//Constants to query the API
 const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
 const config = {headers: {"Content-Type": "application/json"}}
 
+//Axios query to create a user
 async function registerUser(user) {
     return await axios.post(apiBaseUrl,
         JSON.stringify(user),
@@ -15,13 +16,16 @@ async function registerUser(user) {
         .then(data => data.data.jwt)
 }
 
+//Registers a user
 export default function Register({ setToken }) {
-
+    //Defining useNavigate for use later
     const navigate = useNavigate();
 
+    //React useState to watch for userName and password
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
+    //Submission of the user's information and returning of a jwt
     const submitButton = async e => {
         e.preventDefault();
         const jwt = await registerUser({
@@ -29,13 +33,14 @@ export default function Register({ setToken }) {
             password
         });
         setToken(jwt);
-        return <Navigate to="/" />
     }
 
+    //Function to send the user back to login
     function navigateToLogin() {
         navigate('/login');
     }
 
+    //Returning React HTML information to render a register page
     return (
         setToken ? <Navigate to="/" /> :
         <div className="register">
@@ -57,6 +62,7 @@ export default function Register({ setToken }) {
         </div>
     )
 }
+
 Register.propTypes = {
     setToken: PropTypes.func.isRequired
 };

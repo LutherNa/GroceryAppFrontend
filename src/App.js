@@ -1,22 +1,17 @@
 //import logo from './logo.svg';
 import React from 'react';
-import Home from './Home.js'
+import Home from './Componenets/Home.js'
 import './App.css';
 import Login from './Componenets/Login.js';
 import Register from './Componenets/Register.js';
-import useToken from './Token.js';
+import useToken from './Models/Token.js';
 import {Routes, Route, useRoutes} from 'react-router-dom';
 
 const App = () => {
- 
-    const { token, setToken } = useToken(''); 
-  //  let routes = useRoutes([
-  //    { path: "/", element: <Home /> },
-  //    { path: "./login", element: <Login setToken={setToken} /> },
-  //    { path: "register", element: <Register setToken={setToken} /> },
-  //  ]);
+  //Use token model, See Token.js in Models
+  const { token, setToken } = useToken(''); 
 
-  //Demo
+  //Returns the user to their desired route based on route information
   return (
             <Routes>
                 <Route path="/register" element={<Register setToken={setToken} />} />
