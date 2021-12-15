@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 const apiBaseUrl = 'http://localhost:8081/api/public/users/login'
 
 async function loginUser(user) {
-    await axios.post(apiBaseUrl,
+    return await axios.post(apiBaseUrl,
         {user})
-        .then(data => data.JSON())
+        .then(data => data.data.jwt)
 }
 
 export default function Login({ setToken }) {

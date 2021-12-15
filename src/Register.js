@@ -3,16 +3,17 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 //import './User.css';
 import PropTypes from 'prop-types';
+import useToken from "./Token";
 
 const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
 const config = {headers: {"Content-Type": "application/json"}}
 
 
 async function registerUser(user) {
-    await axios.post(apiBaseUrl,
+    return await axios.post(apiBaseUrl,
         JSON.stringify(user),
         config)
-        .then(data => data.JSON())
+        .then(data => data.data.jwt)
 }
 
 export default function Register({ setToken }) {
@@ -25,6 +26,7 @@ const submitButton = async e => {
         username,
         password
     });
+    console.log(jwt)
     setToken(jwt);
 }
 
@@ -43,6 +45,7 @@ const submitButton = async e => {
                 <div className="button">
                     <button type="submit">Submit</button>
                 </div>
+                
             </form>
         </div>
     )
