@@ -1,33 +1,23 @@
 //import logo from './logo.svg';
 import React from 'react';
+import Home from './Home.js'
 import './App.css';
 import Login from './Login.js';
 import Register from './Register.js';
 import useToken from './Token.js';
-import {Routes, Route} from 'react-router-dom';
+import {Routes, Route, useRoutes} from 'react-router-dom';
 
-function App() {
+const App = () => {
+ 
+    const { token, setToken } = useToken(''); 
+    let routes = useRoutes([
+      { path: "/", element: <Home /> },
+      { path: "login", element: <Login setToken={setToken} /> },
+      { path: "register", element: <Register setToken={setToken} /> },
+    ]);
 
-  const { token, setToken } = useToken('');
-
-  console.log("Rendering Page")
-  if(!token) return <Register setToken={setToken} />
-  console.log(token);
-  return (
-    <>
-    <h1>YOU MADE IT!</h1>
-    </>
-  )
-}
+    if(!token) return <Register setToken={setToken} route="register" path="register" />;
+    return routes;
+  };
 
 export default App;
-
-/**
- * (!token) ? 
-    <Register setToken={setToken} />:
-    (
-      <div className="MainPage">
-        Insert main page here plz
-      </div>
-    )
- */

@@ -1,13 +1,12 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
 //import './User.css';
 import PropTypes from 'prop-types';
-import useToken from "./Token";
+import {Link, Route, Routes} from 'react-router-dom';
+import Login from './Login.js';
 
 const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
 const config = {headers: {"Content-Type": "application/json"}}
-
 
 async function registerUser(user) {
     return await axios.post(apiBaseUrl,
@@ -26,7 +25,6 @@ const submitButton = async e => {
         username,
         password
     });
-    console.log(jwt)
     setToken(jwt);
 }
 
@@ -45,8 +43,11 @@ const submitButton = async e => {
                 <div className="button">
                     <button type="submit">Submit</button>
                 </div>
-                
             </form>
+            <Link to="login">Already have an account? Click here to sign in.</Link>
+            <Routes>
+                <Route path="login" element={<Login setToken={setToken} />} />
+            </Routes>
         </div>
     )
 }
