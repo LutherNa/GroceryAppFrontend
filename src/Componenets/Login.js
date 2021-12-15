@@ -3,11 +3,12 @@ import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
 import {Link, Navigate } from 'react-router-dom';
-import Register from './Register.js';
 
+//Constants to query the API
 const apiBaseUrl = 'http://localhost:8081/api/public/users/login'
 const config = {headers: {"Content-Type": "application/json"}}
 
+//Axios query for login information
 async function loginUser(user) {
     return await axios.post(apiBaseUrl,
         JSON.stringify(user),
@@ -15,19 +16,23 @@ async function loginUser(user) {
         .then(data => data.data.jwt)
 }
 
+//Login functionality of the login page
 export default function Login({ setToken }) {
+    //React useState to watch for userName and password
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-const submitButton = async e => {
-    e.preventDefault();
-    const jwt = await loginUser({
-        username,
-        password
-    });
-    setToken(jwt);
-}
+    //Functionality of the button used to submit login information
+    const submitButton = async e => {
+        e.preventDefault();
+        const jwt = await loginUser({
+            username,
+            password
+        });
+        setToken(jwt);
+    }
 
+    //Returning a login page rendered in HTML
     return (
         setToken ? <Navigate to="/" /> :
         <div className="login">
@@ -49,6 +54,7 @@ const submitButton = async e => {
         </div>
     )
 }
+
 Login.propTypes = {
     setToken: PropTypes.func.isRequired
 };
