@@ -2,26 +2,26 @@ import axios from "axios";
 import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
-import {Link, Route, Routes} from 'react-router-dom';
-import Login from './Login.js';
+import {Link, Navigate } from 'react-router-dom';
+import Register from './Register.js';
 
-const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
+const apiBaseUrl = 'http://localhost:8081/api/public/users/login'
 const config = {headers: {"Content-Type": "application/json"}}
 
-async function registerUser(user) {
+async function loginUser(user) {
     return await axios.post(apiBaseUrl,
         JSON.stringify(user),
         config)
         .then(data => data.data.jwt)
 }
 
-export default function Register({ setToken }) {
+export default function Login({ setToken }) {
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
 const submitButton = async e => {
     e.preventDefault();
-    const jwt = await registerUser({
+    const jwt = await loginUser({
         username,
         password
     });
@@ -29,8 +29,9 @@ const submitButton = async e => {
 }
 
     return (
-        <div className="register">
-            <h1>Use the dialog boxes below to register:</h1>
+        setToken ? <Navigate to="/" /> :
+        <div className="login">
+            <h1>Please login to continue</h1>
             <form onSubmit={submitButton}>
                 <label>
                     <p>Username</p>
@@ -44,13 +45,10 @@ const submitButton = async e => {
                     <button type="submit">Submit</button>
                 </div>
             </form>
-            <Link to="login">Already have an account? Click here to sign in.</Link>
-            <Routes>
-                <Route path="login" element={<Login setToken={setToken} />} />
-            </Routes>
+            <Link to="/register">Don't have an account? Click here.</Link>
         </div>
     )
 }
-Register.propTypes = {
+Login.propTypes = {
     setToken: PropTypes.func.isRequired
 };
