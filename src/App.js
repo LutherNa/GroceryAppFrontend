@@ -8,10 +8,11 @@ import {Routes, Route} from 'react-router-dom';
 
 function App() {
 
-  const { token, setToken } = useToken();
+  const { token, setToken } = useToken('');
 
+  console.log("Rendering Page")
   if(!token) return <Register setToken={setToken} />
-
+  console.log(token);
   return (
     <>
     <h1>YOU MADE IT!</h1>
