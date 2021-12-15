@@ -2,35 +2,44 @@ import axios from "axios";
 import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
-import {Link, Route, Router, Routes} from 'react-router-dom';
-import Register from './Register.js';
+import {useNavigate, Navigate} from 'react-router-dom';
+import Login from './Login.js';
 
-const apiBaseUrl = 'http://localhost:8081/api/public/users/login'
+const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
 const config = {headers: {"Content-Type": "application/json"}}
 
-async function loginUser(user) {
+async function registerUser(user) {
     return await axios.post(apiBaseUrl,
         JSON.stringify(user),
         config)
         .then(data => data.data.jwt)
 }
 
-export default function Login({ setToken }) {
+export default function Register({ setToken }) {
+
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
 
-const submitButton = async e => {
-    e.preventDefault();
-    const jwt = await loginUser({
-        username,
-        password
-    });
-    setToken(jwt);
-}
+    const submitButton = async e => {
+        e.preventDefault();
+        const jwt = await registerUser({
+            username,
+            password
+        });
+        setToken(jwt);
+        return <Navigate to="/" />
+    }
+
+    function navigateToLogin() {
+        navigate('/login');
+    }
 
     return (
-        <div className="login">
-            <h1>Please login to continue</h1>
+        setToken ? <Navigate to="/" /> :
+        <div className="register">
+            <h1>Use the dialog boxes below to register:</h1>
             <form onSubmit={submitButton}>
                 <label>
                     <p>Username</p>
@@ -44,13 +53,10 @@ const submitButton = async e => {
                     <button type="submit">Submit</button>
                 </div>
             </form>
-            <Link to="register">Don't have an account? Click here.</Link>
-            <Routes>
-                <Route path="register" element={<Register setToken={setToken} />} />
-            </Routes>
+            <a href="" onClick={navigateToLogin}>Already have an account? Click here to sign in.</a>
         </div>
     )
 }
-Login.propTypes = {
+Register.propTypes = {
     setToken: PropTypes.func.isRequired
 };
