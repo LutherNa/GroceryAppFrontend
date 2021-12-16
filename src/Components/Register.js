@@ -4,12 +4,18 @@ import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import {useNavigate, Navigate} from 'react-router-dom';
 import useToken from "../Models/Token";
+import APIQuery from "../Models/APIQuery";
 
 //Constants to query the API
 const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
+const apiRegisterUrl = '/public/users/register'
 const config = {headers: {"Content-Type": "application/json"}}
 
 //Axios query to create a user
+// async function registerUser(user) {
+//     return await APIQuery.post(apiRegisterUrl,
+//         JSON.stringify(user),)
+//         .then(data => data.data.jwt)
 async function registerUser(user) {
     return await axios.post(apiBaseUrl,
         JSON.stringify(user),
