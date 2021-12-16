@@ -1,23 +1,24 @@
 import axios from "axios";
 import React, { useState } from "react";
 //import './User.css';
+import useToken from "../Models/Token";
 import PropTypes from 'prop-types';
 import {Link, Navigate } from 'react-router-dom';
+import APIQuery from "../Models/APIQuery";
+
 
 //Constants to query the API
-const apiBaseUrl = 'http://localhost:8081/api/public/users/login'
-const config = {headers: {"Content-Type": "application/json"}}
+const apiLoginUrl = '/public/users/login'
 
 //Axios query for login information
 async function loginUser(user) {
-    return await axios.post(apiBaseUrl,
-        JSON.stringify(user),
-        config)
+    return await APIQuery.post(apiLoginUrl,
+        JSON.stringify(user),)
         .then(data => data.data.jwt)
 }
 
 //Login functionality of the login page
-export default function Login({ setToken }) {
+export default function Login({ setToken }, userToken) {
     //React useState to watch for userName and password
     const [username, setUsername] = useState();
     const [password, setPassword] = useState();
@@ -31,10 +32,14 @@ export default function Login({ setToken }) {
         });
         setToken(jwt);
     }
+    
+    const tokenString = sessionStorage.getItem('token');
+    console.log(tokenString)
+    if(tokenString) return <Navigate to="/" />
 
     //Returning a login page rendered in HTML
     return (
-        setToken ? <Navigate to="/" /> :
+        tokenString ? <Navigate to="/" /> :
         <div className="login">
             <h1>Please login to continue</h1>
             <form onSubmit={submitButton}>

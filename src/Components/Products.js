@@ -1,14 +1,18 @@
 import React from 'react';
-import './App.css';
-import Navigate from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
+import useToken from '../Models/Token.js';
 
 
+export default function Products() {
+    const tokenString = sessionStorage.getItem('token');
+    const locationString = sessionStorage.getItem('locationId');
+    const pageAccess = tokenString && locationString;
 
-export default function Products(token) {
+
     return (
-        !token ? <Navigate to="/login" /> :
+        !pageAccess ? <Navigate to="/login" /> :
         <React.Component>
-            <h1>Welcome, {token}!</h1>
+            <h1>Welcome to products!</h1>
         </React.Component>
     )
 }
