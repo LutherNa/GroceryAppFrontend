@@ -6,7 +6,7 @@ import Navigate from 'react-router-dom';
 
 export default function Home(token) {
     return (
-        !userId ? <Navigate to="/login" /> :
+        !token ? <Navigate to="/login" /> :
         <React.Component>
             <h1>Welcome, {token}!</h1>
         </React.Component>
