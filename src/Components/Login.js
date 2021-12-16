@@ -4,16 +4,15 @@ import React, { useState } from "react";
 import useToken from "../Models/Token";
 import PropTypes from 'prop-types';
 import {Link, Navigate } from 'react-router-dom';
+import APIQuery from "../Models/APIQuery";
 
 //Constants to query the API
-const apiBaseUrl = 'http://localhost:8081/api/public/users/login'
-const config = {headers: {"Content-Type": "application/json"}}
+const apiLoginUrl = '/public/users/login'
 
 //Axios query for login information
 async function loginUser(user) {
-    return await axios.post(apiBaseUrl,
-        JSON.stringify(user),
-        config)
+    return await APIQuery.post(apiLoginUrl,
+        JSON.stringify(user),)
         .then(data => data.data.jwt)
 }
 
