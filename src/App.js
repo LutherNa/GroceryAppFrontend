@@ -4,6 +4,9 @@ import Home from './Components/Home.js.js'
 import './App.css';
 import Login from './Components/Login.js.js';
 import Register from './Components/Register.js';
+import Locations from './Components/Locations.js';
+import GroceryLists from './Components/GroceryLists.js';
+import Products from './Components/Products.js';
 import useToken from './Models/Token.js';
 import {Routes, Route, useRoutes} from 'react-router-dom';
 
@@ -20,7 +23,7 @@ const App = () => {
                 <Route path="/" element={<Home currentToken={setToken} />} />
                 <Route path="/locations" element={<Locations currentToken={setToken} />} />
                 <Route path="/products" element={<Products currentToken={setToken} />} />
-                <Route path="/grocerylist" element={<GroceryList currentToken={setToken} />} />
+                <Route path="/grocerylists" element={<GroceryLists currentToken={setToken} />} />
             </Routes>
             );
   };
