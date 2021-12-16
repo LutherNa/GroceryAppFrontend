@@ -1,14 +1,13 @@
 import React from 'react';
-import './App.css';
-import Navigate from 'react-router-dom';
+import {Navigate} from 'react-router-dom';
+import useToken from '../Models/Token.js';
 
 
-
-export default function Products(token) {
+export default function Products() {
     return (
-        !token ? <Navigate to="/login" /> :
+        !useToken().token ? <Navigate to="/login" /> :
         <React.Component>
-            <h1>Welcome, {token}!</h1>
+            <h1>Welcome to products!</h1>
         </React.Component>
     )
 }

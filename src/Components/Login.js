@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 //import './User.css';
+import useToken from "../Models/Token";
 import PropTypes from 'prop-types';
 import {Link, Navigate } from 'react-router-dom';
 
@@ -34,7 +35,7 @@ export default function Login({ setToken }) {
 
     //Returning a login page rendered in HTML
     return (
-        setToken ? <Navigate to="/" /> :
+        useToken().token ? <Navigate to="/" /> :
         <div className="login">
             <h1>Please login to continue</h1>
             <form onSubmit={submitButton}>

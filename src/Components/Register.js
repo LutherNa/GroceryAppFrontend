@@ -3,6 +3,7 @@ import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
 import {useNavigate, Navigate} from 'react-router-dom';
+import useToken from "../Models/Token";
 
 //Constants to query the API
 const apiBaseUrl = 'http://localhost:8081/api/public/users/register'
@@ -41,8 +42,9 @@ export default function Register({ setToken }) {
     }
 
     //Returning React HTML information to render a register page
+    console.log(!useToken().token)
     return (
-        setToken ? <Navigate to="/" /> :
+        useToken().token ? <Navigate to="/" /> :
         <div className="register">
             <h1>Use the dialog boxes below to register:</h1>
             <form onSubmit={submitButton}>
