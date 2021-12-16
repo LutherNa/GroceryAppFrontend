@@ -1,11 +1,12 @@
 //import logo from './logo.svg';
 import React from 'react';
-import Home from './Componenets/Home.js'
+import Home from './Components/Home.js.js'
 import './App.css';
-import Login from './Componenets/Login.js';
-import Register from './Componenets/Register.js';
+import Login from './Components/Login.js.js';
+import Register from './Components/Register.js';
 import useToken from './Models/Token.js';
 import {Routes, Route, useRoutes} from 'react-router-dom';
+
 
 const App = () => {
   //Use token model, See Token.js in Models
@@ -16,9 +17,12 @@ const App = () => {
             <Routes>
                 <Route path="/register" element={<Register setToken={setToken} />} />
                 <Route path="/login" element={<Login setToken={setToken} />} />
-                <Route path="/" element={<Home currentToken={token} />} />
+                <Route path="/" element={<Home currentToken={setToken} />} />
+                <Route path="/locations" element={<Locations currentToken={setToken} />} />
+                <Route path="/products" element={<Products currentToken={setToken} />} />
+                <Route path="/grocerylist" element={<GroceryList currentToken={setToken} />} />
             </Routes>
             );
   };
-//<Route path="/location" element={<Location currentToken={token}/>} />
+
 export default App;
