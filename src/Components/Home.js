@@ -5,10 +5,13 @@ import useToken from '../Models/Token.js';
 
 
 export default function Home() {
+    const tokenString = sessionStorage.getItem('token');
+
+    
     return (
-        !useToken().token ? <Navigate to="/login" /> :
-        <React.Component>
+        !tokenString ? <Navigate to="/login" /> :
+        <>
             <h1>Welcome Home!</h1>
-        </React.Component>
+        </>
     )
 }

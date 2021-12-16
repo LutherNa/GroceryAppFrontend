@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
-import {useNavigate, Navigate} from 'react-router-dom';
+import {useNavigate, Navigate, Link} from 'react-router-dom';
 import useToken from "../Models/Token";
 import APIQuery from "../Models/APIQuery";
 
@@ -19,7 +19,7 @@ async function registerUser(user) {
 //Registers a user
 export default function Register({ setToken }) {
     //Defining useNavigate for use later
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     //React useState to watch for userName and password
     const [username, setUsername] = useState();
@@ -34,16 +34,10 @@ export default function Register({ setToken }) {
         });
         setToken(jwt);
     }
-
-    //Function to send the user back to login
-    function navigateToLogin() {
-        navigate('/login');
-    }
-
+    const tokenString = sessionStorage.getItem('token');
     //Returning React HTML information to render a register page
-    console.log(!useToken().token)
     return (
-        useToken().token ? <Navigate to="/" /> :
+        tokenString ? <Navigate to="/" /> :
         <div className="register">
             <h1>Use the dialog boxes below to register:</h1>
             <form onSubmit={submitButton}>
@@ -59,7 +53,7 @@ export default function Register({ setToken }) {
                     <button type="submit">Submit</button>
                 </div>
             </form>
-            <a href="" onClick={navigateToLogin}>Already have an account? Click here to sign in.</a>
+            <Link to="/login">Already have an account? Click here.</Link>
         </div>
     )
 }

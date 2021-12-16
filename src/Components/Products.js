@@ -4,10 +4,15 @@ import useToken from '../Models/Token.js';
 
 
 export default function Products() {
+    const tokenString = sessionStorage.getItem('token');
+    const locationString = sessionStorage.getItem('locationId');
+    const pageAccess = tokenString && locationString;
+
+
     return (
-        !useToken().token ? <Navigate to="/login" /> :
-        <React.Component>
+        !pageAccess ? <Navigate to="/login" /> :
+        <>
             <h1>Welcome to products!</h1>
-        </React.Component>
+        </>
     )
 }
