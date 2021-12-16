@@ -9,8 +9,8 @@ export default function Locations() {
 
     return (
         !tokenString ? <Navigate to="/login" /> :
-        <React.Component>
+        <>
             <h1>Welcome to location!</h1>
-        </React.Component>
+        </>
     )
 }

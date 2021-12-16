@@ -11,8 +11,8 @@ export default function Products() {
 
     return (
         !pageAccess ? <Navigate to="/login" /> :
-        <React.Component>
+        <>
             <h1>Welcome to products!</h1>
-        </React.Component>
+        </>
     )
 }

@@ -1,11 +1,10 @@
 import axios from "axios";
 import React, { useState } from "react";
 //import './User.css';
-import useToken from "../Models/Token";
 import PropTypes from 'prop-types';
-import {Link, Navigate } from 'react-router-dom';
+import {useNavigate, Navigate, Link} from 'react-router-dom';
+import useToken from "../Models/Token";
 import APIQuery from "../Models/APIQuery";
-
 
 //Constants to query the API
 const apiLoginUrl = '/public/users/login'
