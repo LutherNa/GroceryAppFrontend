@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
+import Navbar from './Navbar/Navbar.js';
 
 
 
@@ -9,8 +10,9 @@ export default function Locations() {
 
     return (
         !tokenString ? <Navigate to="/login" /> :
-        <React.Component>
+        <>
+            <Navbar />
             <h1>Welcome to location!</h1>
-        </React.Component>
+        </>
     )
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import useToken from '../Models/Token.js';
+import Navbar from './Navbar/Navbar.js';
 
 
 
@@ -11,6 +11,7 @@ export default function Home() {
     return (
         !tokenString ? <Navigate to="/login" /> :
         <>
+            <Navbar />
             <h1>Welcome Home!</h1>
         </>
     )

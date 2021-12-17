@@ -1,6 +1,6 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import useToken from '../Models/Token.js';
+import Navbar from './Navbar/Navbar.js';
 
 
 export default function Products() {
@@ -11,8 +11,9 @@ export default function Products() {
 
     return (
         !pageAccess ? <Navigate to="/login" /> :
-        <React.Component>
+        <>
+            <Navbar />
             <h1>Welcome to products!</h1>
-        </React.Component>
+        </>
     )
 }
