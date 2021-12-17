@@ -1,13 +1,19 @@
 import React from 'react';
 import {Navigate} from 'react-router-dom';
-import useToken from '../Models/Token.js';
+import Navbar from './Navbar/Navbar.js';
 
 
 export default function GroceryLists() {
+    const tokenString = sessionStorage.getItem('token');
+    const locationString = sessionStorage.getItem('locationId');
+    const pageAccess = tokenString && locationString;
+
+
     return (
-        !useToken().token ? <Navigate to="/login" /> :
-        <React.Component>
+        !pageAccess ? <Navigate to="/login" /> :
+        <>
+            <Navbar />
             <h1>Welcome to Grocery Lists!</h1>
-        </React.Component>
+        </>
     )
 }
