@@ -1,10 +1,8 @@
-import axios from "axios";
 import React, { useState } from "react";
-//import './User.css';
 import PropTypes from 'prop-types';
-import {useNavigate, Navigate, Link} from 'react-router-dom';
-import useToken from "../Models/Token";
-import APIQuery from "../Models/APIQuery";
+import {Navigate, Link} from 'react-router-dom';
+import './PreLogin.css';
+import APIQuery from "../../Models/APIQuery";
 
 //Constants to query the API
 const apiRegisterUrl = '/public/users/register'
@@ -34,6 +32,7 @@ export default function Register({ setToken }) {
         });
         setToken(jwt);
     }
+    
     const tokenString = sessionStorage.getItem('token');
     //Returning React HTML information to render a register page
     return (

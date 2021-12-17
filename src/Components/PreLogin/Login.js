@@ -3,8 +3,8 @@ import React, { useState } from "react";
 //import './User.css';
 import PropTypes from 'prop-types';
 import {useNavigate, Navigate, Link} from 'react-router-dom';
-import useToken from "../Models/Token";
-import APIQuery from "../Models/APIQuery";
+import './PreLogin.css';
+import APIQuery from "../../Models/APIQuery";
 
 //Constants to query the API
 const apiLoginUrl = '/public/users/login'
