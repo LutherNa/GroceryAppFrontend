@@ -39,23 +39,29 @@ export default function Login({ setToken }, userToken) {
     //Returning a login page rendered in HTML
     return (
         tokenString ? <Navigate to="/" /> :
-        <div className="login">
-            <h1>Please login to continue</h1>
-            <form onSubmit={submitButton}>
-                <label>
-                    <p>Username</p>
-                    <input type="text" onChange={e => setUsername(e.target.value)} />
+        <body className="login">
+            <div class="main">
+            <p class="sign" align="center">Sign in</p>
+            <form1 onSubmit={submitButton}>
+
+                <label>     
+                    <input class="un " type="text" align="center" placeholder="Username" 
+                    onChange={e => setUsername(e.target.value)} />
                 </label>
-                <label>
-                    <p>Password</p>
-                    <input type="password" onChange={e => setPassword(e.target.value)} />
+
+                <label>          
+                    <input class="pass" type="password" align="center" placeholder="Password" 
+                    onChange={e => setPassword(e.target.value)} />
                 </label>
-                <div className="button">
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-            <Link to="/register">Don't have an account? Click here.</Link>
-        </div>
+
+                <a class="submit" align="center">Sign in</a>
+
+            </form1>
+            <Link to="/register"><p class="forgot" align="center">
+                <a href="#"/>Forgot Password?</p></Link>
+                
+            </div>
+        </body>
     )
 }
 
