@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
 import APIQuery from "../../Models/APIQuery";
 import LocationRenderer from "./LocationRenderer.js";
+import Navbar from "../Navbar/Navbar";
 
 //Constants to query the API
 const tokenString = sessionStorage.getItem('token');
@@ -27,7 +28,8 @@ export default function Location(userLocation) {
             .then(data => setSearch(data))
     }
     function addToList(element) {
-        sessionStorage.setItem('locationId', JSON.stringify(element.locationId));
+        // sessionStorage.setItem('locationId', JSON.stringify(element.locationId));
+        sessionStorage.setItem('locationId', element.locationId);
         console.log(element.locationId);
     }
     //Functionality of the button used to submit zipcode
@@ -47,6 +49,7 @@ export default function Location(userLocation) {
     return (
         locationString ? <Navigate to="/" /> :
             <div className="Location">
+                <Navbar />
                 <h1>Please enter a zip code to continue</h1>
                 <form onSubmit={submitButton}>
                     <label>
