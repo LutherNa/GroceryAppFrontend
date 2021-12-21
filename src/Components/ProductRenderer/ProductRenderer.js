@@ -1,7 +1,6 @@
 import React, { useState } from "react";
+import { CloseButton } from "react-bootstrap"
 import { Navigate } from 'react-router-dom';
-//import Navbar from '../Navbar/Navbar.js';
-//import APIQuery from "../Models/APIQuery";
 import { render } from "@testing-library/react";
 
 const apiProductSearchUrl = '/products'
@@ -11,17 +10,17 @@ function addToCart() {
 
 }
 
-export default function ProductRenderer(data) {
+export default function ProductRenderer({ data, addToList }) {
     console.log(data);
+    if (data === undefined) return <>
+    </>
     const dataArray = data.data;
     console.log(dataArray);
-    if (data.data === undefined) return <>
-    </>
-    return <>
-        {dataArray.data.forEach(element => {
+    return <div id="products">
+        {dataArray.forEach(element => {
             render(<div key={element.productId} >
-                {element.description}
+                {element.description} <CloseButton onClick={() => addToList(element)} >Add to cart</CloseButton>
             </div>)
         })}
-    </>
+    </div>
 }

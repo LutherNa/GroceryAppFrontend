@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
-import Navbar from '../Components/Navbar/Navbar.js';
-import APIQuery from "../Models/APIQuery";
+import Navbar from '../../Components/Navbar/Navbar.js';
+import APIQuery from "../../Models/APIQuery";
 import ProductRenderer from "./ProductRenderer.js";
 
 const apiProductSearchUrl = '/products'
@@ -16,7 +16,6 @@ export default function Products() {
     const [productName, setProductName] = useState();
     var storeProducts = [];
     const [search, setSearch] = useState();
-    var renderProducts = true;
 
     async function searchProduct(searchQuery) {
         const tokenString = sessionStorage.getItem('token');
@@ -30,6 +29,9 @@ export default function Products() {
             .then(data => setSearch(data))
     }
 
+    function addToList(element) {
+        console.log(element.productId);
+    }
 
     const submitButton = async e => {
         e.preventDefault();
@@ -58,7 +60,7 @@ export default function Products() {
                             <div className="button">
                                 <button type="submit">Submit</button>
                             </div>
-                            <ProductRenderer data={search} />
+                            <ProductRenderer data={search} addToList={addToList} key={search} />
                         </form>
                     </>
     )
