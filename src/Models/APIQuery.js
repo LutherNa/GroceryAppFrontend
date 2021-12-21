@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const apiBaseUrl = 'http://localhost:8081/api'
+const apiBaseUrl = 'http://localhost:8080/api'
 const baseHeaders = {"Content-Type": "application/json"}
 
 let APIQuery
