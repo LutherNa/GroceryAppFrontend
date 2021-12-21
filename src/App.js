@@ -7,25 +7,25 @@ import Products from './ProductRenderer/Products';
 import Locations from './Components/Locations';
 import GroceryLists from './Components/GroceryLists';
 import useToken from './Models/Token.js';
-import LocationsRenderer from './Components/Location/LocationsRenderer';
-import {Routes, Route, useRoutes} from 'react-router-dom';
+import { Routes, Route, useRoutes } from 'react-router-dom';
 
 
 const App = () => {
   //Use token model, See Token.js in Models
   const { token, setToken } = useToken();
+
+  console.log(token)
   //Returns the user to their desired route based on route information
   return (
-            <Routes>
-                <Route path="/register" element={<Register setToken={setToken}  />} />
-                <Route path="/login" element={<Login setToken={setToken} />} />
-                <Route path="/" element={<Home />} />
-                <Route path="/locations" element={<Locations />} />
-                <Route path="/LocationsRenderer" element={<LocationsRenderer />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/grocerylists" element={<GroceryLists />} />
-            </Routes>
-            );
-  };
+    <Routes>
+      <Route path="/register" element={<Register setToken={setToken} />} />
+      <Route path="/login" element={<Login setToken={setToken} />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/locations" element={<Locations />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/grocerylists" element={<GroceryLists />} />
+    </Routes>
+  );
+};
 
 export default App;
