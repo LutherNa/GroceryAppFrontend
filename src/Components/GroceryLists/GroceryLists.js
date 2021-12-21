@@ -17,10 +17,12 @@ const apiGroceryListUrl = '/grocerylist'
 //     )
 // });
 
-export default function GroceryLists() {
+export default function GroceryLists(props) {
 
     let tokenString = sessionStorage.getItem('token');
     let locationString = sessionStorage.getItem('locationId');
+    let groceryListId = sessionStorage.getItem('groceryListId');
+    let groceryListName = sessionStorage.getItem('groceryListName');
     const [currentUser, setCurrentUser] = useState();
     const [currentList, setCurrentList] = useState();
 
@@ -51,12 +53,14 @@ export default function GroceryLists() {
             .then((response) => {
                 if (response.status < 300 && response.status >= 200) {
                     setCurrentList(response.data);
+                    sessionStorage.setItem('groceryListId', response.data.groceryList.groceryListId);
                 } else {
                     // this is lazy and terrible and I regret it deeply - NL
-                    APIQuery.post(apiGroceryListUrl+'/newList'+locationString,
+                    APIQuery.post(apiGroceryListUrl+'/newList/'+locationString,
                     {headers: {"Authorization" : JSON.parse(token)}})
                     .then((response) => {
                         setCurrentList(response.data);
+                        sessionStorage.setItem('groceryListId', response.data.groceryList.groceryListId);
                     })
                 }
         })
@@ -84,6 +88,14 @@ export default function GroceryLists() {
     if (!currentUser) {
         refreshUser(tokenString);
     }
+    // if (!currentList && groceryListName) {
+    //     getGroceryList(tokenString, groceryListName);
+    // } else if (!groceryListName && currentList) {
+    //     sessionStorage.setItem('groceryListName', currentList.groceryList.listName);
+    //     sessionStorage.setItem('groceryListId', currentList.groceryList.groceryListId);
+    //     groceryListName = sessionStorage.getItem('groceryListName');
+    //     groceryListId = sessionStorage.getItem('groceryListId');
+    // }
     return (
         !pageAccess ? <Navigate to="/login" /> :
         <>
@@ -91,6 +103,13 @@ export default function GroceryLists() {
             <h1>Welcome to Grocery Lists!</h1>
             <h2>Current User: {currentUser?.username || "Loading"} </h2>
             <h2>Current List: {currentList?.groceryList.listName || "Loading"} </h2>
+            {/* <select name="groceryLists" value={currentUser?.groceryLists || undefined}>
+                if (currentUser) {
+                    currentUser.groceryLists.map((e, key) => {
+                    return <option key={key} value={e.value}>{e.listName}</option>;
+                })
+                } else {undefined}                
+            </select> */}
             <GroceryListRenderer data={currentList?.listItems || undefined} deleteListItem = {deleteListItem} key={currentList} />
         </>
     )
