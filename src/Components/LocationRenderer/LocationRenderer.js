@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { Navigate } from 'react-router-dom';
-//import Navbar from '../Navbar/Navbar.js';
-//import APIQuery from "../Models/APIQuery";
 import { render } from "@testing-library/react";
 
-const apiProductSearchUrl = '/products'
+const apiLocationUrl = '/location'
 const apiGroceryListAddUrl = '/'
 
 function addToCart() {
 
 }
 
-export default function ProductRenderer(data) {
+export default function LocationRenderer(data) {
     console.log(data);
     const dataArray = data.data;
     console.log(dataArray);
@@ -19,8 +16,9 @@ export default function ProductRenderer(data) {
     </>
     return <>
         {dataArray.data.forEach(element => {
-            render(<div key={element.productId} >
-                {element.description}
+            render(<div key={element.locationId} >
+                <h1>{element.locationId}</h1>
+                <button type="submit" >Submit</button>
             </div>)
         })}
     </>
