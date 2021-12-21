@@ -11,11 +11,9 @@ function addToCart() {
 }
 
 export default function ProductRenderer({data, addToList}) {
-    console.log(data);
     if(data === undefined) return <>
     </>
     const dataArray = data.data;
-    console.log(dataArray);
     return <div id="products">
     {dataArray.forEach(element => {
         render(<div key={element.productId} >
