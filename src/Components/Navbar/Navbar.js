@@ -1,6 +1,7 @@
 import React from "react";
 import { NavbarItems } from "./NavbarItems";
 import './Navbar.css';
+import logo from './Logo.png'
 
 export default function Navbar(){
     // state = { clicked: false }
@@ -11,9 +12,8 @@ export default function Navbar(){
 
 
     return <nav className="NavbarItems">
-        <h1 className="navbar-logo">Vanq App</h1>
+        <img src={logo}  /> 
         <div className="menu-icon">
-
         </div >
         <div className="navigation" >
             {NavbarItems.map(( item, index) => {

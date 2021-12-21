@@ -11,6 +11,9 @@ function addToCart() {
 }
 
 export default function ProductRenderer({data, addToList}) {
+    
+    var myDiv = document.getElementById("products");
+    if(myDiv != null) myDiv.innerHTML = "";
     if(data === undefined) return <>
     </>
     const dataArray = data.data;

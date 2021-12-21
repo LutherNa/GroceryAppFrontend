@@ -11,11 +11,8 @@ const apiGroceryListUrl = '/grocerylist'
 
 export default function Products() {
     const tokenString = sessionStorage.getItem('token');
-    // const groceryListId = 2; 
-    let groceryListId = sessionStorage.getItem('groceryListId')
-    // const groceryListName = "newList"; 
-    let groceryListName = sessionStorage.getItem('groceryListName');
-    // const locationString = "01400943";
+    const groceryListId = sessionStorage.getItem('groceryListId')
+    const groceryListName = sessionStorage.getItem('groceryListName');
     const locationString = sessionStorage.getItem('locationId');
     const [productName, setProductName] = useState();
     var storeProducts = [];
