@@ -10,7 +10,7 @@ export default function LocationRenderer({ data, addToList }) {
     return <div id="locations">
         {dataArray.forEach(element => {
             render(<div key={element.locationId} >
-                {element.locationId} <CloseButton onClick={() => addToList(element)} >Choose location</CloseButton>
+                {element.locationId} {element.name} <CloseButton onClick={() => addToList(element)} >Choose location</CloseButton>
             </div>)
         })}
     </div>
