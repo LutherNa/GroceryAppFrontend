@@ -31,7 +31,7 @@ export default function GroceryLists() {
                 <Navigate to="/login" />
             }
         }
-        let bearer = "Bearer ";
+        // let bearer = "Bearer ";
         await APIQuery.get(apiCurrentUserUrl,
             {headers: {"Authorization" : JSON.parse(token)}})
             .then((response) => {
@@ -49,8 +49,16 @@ export default function GroceryLists() {
         await APIQuery.get(apiGroceryListUrl+'/'+listName+'/'+locationString, 
             {headers: {"Authorization" : JSON.parse(token)}})
             .then((response) => {
-                response = response.data;
-                setCurrentList(response);
+                if (response.status < 300 && response.status >= 200) {
+                    setCurrentList(response.data);
+                } else {
+                    // this is lazy and terrible and I regret it deeply - NL
+                    APIQuery.post(apiGroceryListUrl+'/newList'+locationString,
+                    {headers: {"Authorization" : JSON.parse(token)}})
+                    .then((response) => {
+                        setCurrentList(response.data);
+                    })
+                }
         })
     };
 
