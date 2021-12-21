@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
-import Navbar from '../../Components/Navbar/Navbar.js';
+import Navbar from '../Navbar/Navbar.js';
 import APIQuery from "../../Models/APIQuery";
 import ProductRenderer from "./ProductRenderer.js";
 
