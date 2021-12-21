@@ -51,9 +51,10 @@ export default function GroceryLists(props) {
         await APIQuery.get(apiGroceryListUrl+'/'+listName+'/'+locationString, 
             {headers: {"Authorization" : JSON.parse(token)}})
             .then((response) => {
-                if (response.status < 300 && response.status >= 200) {
+                if (response.status < 300 && response.status > 199) {
                     setCurrentList(response.data);
                     sessionStorage.setItem('groceryListId', response.data.groceryList.groceryListId);
+                    sessionStorage.setItem('groceryListName', response.data.groceryList.listName);
                 } else {
                     // this is lazy and terrible and I regret it deeply - NL
                     APIQuery.post(apiGroceryListUrl+'/newList/'+locationString,
@@ -61,6 +62,7 @@ export default function GroceryLists(props) {
                     .then((response) => {
                         setCurrentList(response.data);
                         sessionStorage.setItem('groceryListId', response.data.groceryList.groceryListId);
+                        sessionStorage.setItem('groceryListName', response.data.groceryList.listName);
                     })
                 }
         })
