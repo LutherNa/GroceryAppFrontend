@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
-import APIQuery from "../Models/APIQuery";
+import APIQuery from "../../Models/APIQuery";
 import LocationRenderer from "./LocationRenderer.js";
 
 //Constants to query the API
