@@ -5,43 +5,45 @@ import APIQuery from "../Models/APIQuery";
 
 //Constants to query the API
 const tokenString = sessionStorage.getItem('token');
-const apiLoginUrl = '/location'
+const apiLocationUrl = '/location'
+
 
 //Axios query for location information
-async function getLocation(locationId) {
-    return await APIQuery.post(apiLoginUrl,
-        JSON.stringify(locationId),
+async function getLocation(zipCode) {
+    return await APIQuery.post(apiLocationUrl,
+        JSON.stringify(zipCode),
         {
             headers: {
-                Authorization: tokenString
+                Authorization: JSON.parse(tokenString)
             }
         })
-        .then(data => data.data.locationId)
+        .then(data => data.data.zipCode)
 }
 
 
 //Location page
-export default function Location({ setLocation }, userLocation) {
+export default function Location(userLocation) {
     //React useState to watch for a zipcode
-    const [locationId, setZipCode] = useState();
+    const [location, setLocation] = useState();
+    const [zipCode, setZipCode] = useState();
 
     //Functionality of the button used to submit zipcode
     const submitButton = async e => {
         e.preventDefault();
         const locationData = await getLocation({
-            locationId,
+            zipCode,
         });
-        setLocation(locationId);
+        setLocation(locationData);
     }
-
+    console.log(location);
     const locationString = sessionStorage.getItem('location');
-    console.log(locationString)
+    //console.log(locationString)
     if (locationString) return <Navigate to="/" />
 
     //Returning a login page rendered in HTML
     return (
         locationString ? <Navigate to="/" /> :
-            <div className="location">
+            <div className="Location">
                 <h1>Please enter a zip code to continue</h1>
                 <form onSubmit={submitButton}>
                     <label>
@@ -55,7 +57,3 @@ export default function Location({ setLocation }, userLocation) {
             </div>
     )
 }
-
-// Location.propTypes = {
-//     setLocation: PropTypes.func.isRequired
-// };

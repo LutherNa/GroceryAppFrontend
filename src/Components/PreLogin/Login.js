@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from 'prop-types';
-<<<<<<< HEAD:src/Components/Login.js
 import { Navigate, Link } from 'react-router-dom';
-import APIQuery from "../Models/APIQuery";
-=======
-import {useNavigate, Navigate, Link} from 'react-router-dom';
-import './PreLogin.css';
 import APIQuery from "../../Models/APIQuery";
->>>>>>> 4954baa33576f8310355e5ff3637b9c0e4a17b8f:src/Components/PreLogin/Login.js
 
 //Constants to query the API
 const apiLoginUrl = '/public/users/login'
