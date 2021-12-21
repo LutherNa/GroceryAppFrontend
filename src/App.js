@@ -3,18 +3,17 @@ import React from 'react';
 import Home from './Components/Home'
 import Login from './Components/PreLogin/Login';
 import Register from './Components/PreLogin/Register';
-import Products from './Components/Products';
-import Locations from './Components/Locations';
+import Products from './Components/ProductRenderer/Products';
+import Locations from './Components/Location/Locations';
 import GroceryLists from './Components/GroceryLists';
 import useToken from './Models/Token.js';
+import LocationsRenderer from './Components/Location/LocationsRenderer';
 import {Routes, Route, useRoutes} from 'react-router-dom';
 
 
 const App = () => {
   //Use token model, See Token.js in Models
-  const { token, setToken } = useToken(); 
-
-  console.log(token)
+  const { token, setToken } = useToken();
   //Returns the user to their desired route based on route information
   return (
             <Routes>
@@ -22,6 +21,7 @@ const App = () => {
                 <Route path="/login" element={<Login setToken={setToken} />} />
                 <Route path="/" element={<Home />} />
                 <Route path="/locations" element={<Locations />} />
+                <Route path="/LocationsRenderer" element={<LocationsRenderer />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/grocerylists" element={<GroceryLists />} />
             </Routes>
