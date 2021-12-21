@@ -1,9 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
-//import './User.css';
 import PropTypes from 'prop-types';
-import {useNavigate, Navigate, Link} from 'react-router-dom';
-import './PreLogin.css';
+import { Navigate, Link } from 'react-router-dom';
 import APIQuery from "../../Models/APIQuery";
 
 //Constants to query the API
@@ -12,7 +9,7 @@ const apiLoginUrl = '/public/users/login'
 //Axios query for login information
 async function loginUser(user) {
     return await APIQuery.post(apiLoginUrl,
-        JSON.stringify(user),)
+        JSON.stringify(user))
         .then(data => data.data.jwt)
 }
 
@@ -31,14 +28,15 @@ export default function Login({ setToken }, userToken) {
         });
         setToken(jwt);
     }
-    
+
     const tokenString = sessionStorage.getItem('token');
     console.log(tokenString)
-    if(tokenString) return <Navigate to="/" />
+    if (tokenString) return <Navigate to="/" />
 
     //Returning a login page rendered in HTML
     return (
         tokenString ? <Navigate to="/" /> :
+
         <div className="login">
             <div className="main">
             <p className="sign" align="center">Sign in</p>
@@ -62,6 +60,7 @@ export default function Login({ setToken }, userToken) {
                 
             </div>
         </div>
+
     )
 }
 
