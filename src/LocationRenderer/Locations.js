@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import PropTypes from 'prop-types';
 import { Navigate } from 'react-router-dom';
 import APIQuery from "../Models/APIQuery";
 import LocationRenderer from "./LocationRenderer.js";
@@ -27,7 +26,10 @@ export default function Location(userLocation) {
             })
             .then(data => setSearch(data))
     }
-
+    function addToList(element) {
+        sessionStorage.setItem('locationId', JSON.stringify(element.locationId));
+        console.log(element.locationId);
+    }
     //Functionality of the button used to submit zipcode
     const submitButton = async e => {
         e.preventDefault();
@@ -54,7 +56,7 @@ export default function Location(userLocation) {
                     <div className="button">
                         <button type="submit">Submit</button>
                     </div>
-                    <LocationRenderer data={search} />
+                    <LocationRenderer data={search} addToList={addToList} key={search} />
                 </form>
             </div>
     )
