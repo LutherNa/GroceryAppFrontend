@@ -37,30 +37,30 @@ export default function Register({ setToken }) {
     //Returning React HTML information to render a register page
     return (
         tokenString ? <Navigate to="/" /> :
-        <body className="register">
-            <div class="main">
-            <p class="sign" align="center">Register</p>
-            <form1 onSubmit={submitButton}>
+        <div className="register">
+            <div className="main">
+            <p className="sign" align="center">Register</p>
+            <form onSubmit={submitButton}>
 
                 <label>
-                    <input class="un " type="text" align="center" placeholder="Username" 
+                    <input className="un " type="text" align="center" placeholder="Username" 
                         onChange={e => setUsername(e.target.value)} />
                 </label>
 
                 <label>                  
-                    <input class="pass" type="password" align="center" placeholder="Password" 
+                    <input className="pass" type="password" align="center" placeholder="Password" 
                         onChange={e => setPassword(e.target.value)} />
                 </label>
 
-                <a class="submit" align="center">Submit</a>
+                <button type="submit" className="submit" align="center">Submit</button>
 
-            </form1>
+            </form>
 
-            <Link to="/login"><p class="forgot" align="center">
+            <Link to="/login"><p className="forgot" align="center">
                 <a href="#"/>Already have an account? Click here.</p></Link>
             
             </div>
-        </body>
+        </div>
     )
 }
 
