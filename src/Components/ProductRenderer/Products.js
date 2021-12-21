@@ -13,7 +13,8 @@ export default function Products() {
     const tokenString = sessionStorage.getItem('token');
     const groceryListId = 2; //sessionStorage.getItem('groceryListId')
     const groceryListName = "newList"; //sessionStorage.getItem('groceryListName');
-    const locationString = "01400943";//sessionStorage.getItem('locationId');
+    // const locationString = "01400943";
+    const locationString = sessionStorage.getItem('locationId');
     const [productName, setProductName] = useState();
     var storeProducts = [];
     const [search, setSearch] = useState();
@@ -41,9 +42,9 @@ export default function Products() {
     }
 
     async function addToList(element) {
-        var userId = await getUserId();
+        // var userId = await getUserId();
         const path = apiGroceryListUrl+groceryListName+'/'+locationString+'/'+element.productId+'/'+1;
-        console.log(path);
+        // console.log(path);
 
         APIQuery.post(path,{},{headers:{
             Authorization: JSON.parse(tokenString)

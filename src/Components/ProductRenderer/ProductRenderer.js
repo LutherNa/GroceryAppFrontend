@@ -16,7 +16,8 @@ export default function ProductRenderer({data, addToList}) {
     const dataArray = data.data;
     return <div id="products">
     {dataArray.forEach(element => {
-        render(<div key={element.productId} >
+        render(
+        <div key={element.productId} >
             {element.description} <CloseButton onClick={() => addToList(element)} >Add to cart</CloseButton>
         </div>)
     })}
