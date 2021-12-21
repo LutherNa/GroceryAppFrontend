@@ -13,6 +13,8 @@ import {Routes, Route, useRoutes} from 'react-router-dom';
 const App = () => {
   //Use token model, See Token.js in Models
   const { token, setToken } = useToken();
+
+  console.log(token)
   //Returns the user to their desired route based on route information
   return (
             <Routes>

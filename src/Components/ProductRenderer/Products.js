@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import {Navigate} from 'react-router-dom';
-import Navbar from '../Navbar/Navbar.js';
-import APIQuery from "../../Models/APIQuery";
+import { Navigate } from 'react-router-dom';
+import Navbar from '../Components/Navbar/Navbar.js';
+import APIQuery from "../Models/APIQuery";
 import ProductRenderer from "./ProductRenderer.js";
 
 const apiProductSearchUrl = '/products'
@@ -21,9 +21,11 @@ export default function Products() {
         const tokenString = sessionStorage.getItem('token');
         return await APIQuery.post(apiProductSearchUrl,
             JSON.stringify(searchQuery),
-            {headers:{
-                Authorization: JSON.parse(tokenString)
-            }})
+            {
+                headers: {
+                    Authorization: JSON.parse(tokenString)
+                }
+            })
             .then(data => setSearch(data))
     }
 
@@ -37,8 +39,8 @@ export default function Products() {
         console.log(tokenString);
         console.log("Here is what is sent");
         storeProducts = await searchProduct({
-            'term':productName,
-            'locationId':locationString
+            'term': productName,
+            'locationId': locationString
         });
         console.log(search);
     }
