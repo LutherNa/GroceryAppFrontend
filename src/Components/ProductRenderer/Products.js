@@ -1,21 +1,24 @@
 import React, { useState } from "react";
 import { Navigate } from 'react-router-dom';
-import Navbar from '../../Components/Navbar/Navbar.js';
+import Navbar from '../Navbar/Navbar.js';
 import APIQuery from "../../Models/APIQuery";
 import ProductRenderer from "./ProductRenderer.js";
 
 const apiProductSearchUrl = '/products'
-const apiGroceryListAddUrl = '/'
+const apiGroceryListUrl = '/grocerylist/'
 
 
 
 export default function Products() {
     const tokenString = sessionStorage.getItem('token');
     const groceryListId = 2; //sessionStorage.getItem('groceryListId')
+    const groceryListName = "newList"; //sessionStorage.getItem('groceryListName');
     const locationString = "01400943";//sessionStorage.getItem('locationId');
     const [productName, setProductName] = useState();
     var storeProducts = [];
     const [search, setSearch] = useState();
+
+    console.log(tokenString);
 
     async function searchProduct(searchQuery) {
         const tokenString = sessionStorage.getItem('token');
@@ -29,14 +32,26 @@ export default function Products() {
             .then(data => setSearch(data))
     }
 
-    function addToList(element) {
-        console.log(element.productId);
+    async function getUserId() {
+        return await APIQuery.get('/users/current',{
+            headers:{
+                Authorization: JSON.parse(tokenString),
+            }
+        }).then(data => data.data.userId)
+    }
+
+    async function addToList(element) {
+        var userId = await getUserId();
+        const path = apiGroceryListUrl+groceryListName+'/'+locationString+'/'+element.productId+'/'+1;
+        console.log(path);
+
+        APIQuery.post(path,{},{headers:{
+            Authorization: JSON.parse(tokenString)
+        }})
     }
 
     const submitButton = async e => {
         e.preventDefault();
-        console.log(productName);
-        console.log(tokenString);
         console.log("Here is what is sent");
         storeProducts = await searchProduct({
             'term': productName,

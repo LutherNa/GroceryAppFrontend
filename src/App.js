@@ -4,7 +4,7 @@ import Home from './Components/Home'
 import Login from './Components/PreLogin/Login';
 import Register from './Components/PreLogin/Register';
 import Products from './Components/ProductRenderer/Products';
-import Locations from './LocationRenderer/Locations';
+import Locations from './Components/LocationRenderer/Locations';
 import GroceryLists from './Components/GroceryLists';
 import useToken from './Models/Token.js';
 import { Routes, Route, useRoutes } from 'react-router-dom';
