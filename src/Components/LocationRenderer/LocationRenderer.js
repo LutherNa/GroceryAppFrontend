@@ -1,25 +1,17 @@
-import React, { useState } from "react";
 import { render } from "@testing-library/react";
+import { CloseButton } from "react-bootstrap"
 
-const apiLocationUrl = '/location'
-const apiGroceryListAddUrl = '/'
-
-function addToCart() {
-
-}
-
-export default function LocationRenderer(data) {
+export default function LocationRenderer({ data, addToList }) {
     console.log(data);
+    if (data === undefined) return <>
+    </>
     const dataArray = data.data;
     console.log(dataArray);
-    if (data.data === undefined) return <>
-    </>
-    return <>
-        {dataArray.data.forEach(element => {
+    return <div id="locations">
+        {dataArray.forEach(element => {
             render(<div key={element.locationId} >
-                <h1>{element.locationId}</h1>
-                <button type="submit" >Submit</button>
+                {element.locationId} <CloseButton onClick={() => addToList(element)} >Choose location</CloseButton>
             </div>)
         })}
-    </>
+    </div>
 }
